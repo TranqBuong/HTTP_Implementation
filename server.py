@@ -22,7 +22,6 @@ while True:
         respond = get.respondRequest(components)
     elif components[0] == "b'POST":
         respond = post.respondRequest(components)
-    print(respond)
     respond = bytes(respond, "utf-8")
     connection.sendall(respond)
     connection.close()
