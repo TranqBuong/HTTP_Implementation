@@ -10,8 +10,11 @@ def respondRequest(data):
     respond +='Accept-Ranges: '
     respond +='bytes\r\n'
     respond +="Status: 200\r\n"
-    respond +='Content-Length: 12\r\n'
+    file=open("./public/index.html","r")
+    data = file.read()
+    respond +='Content-Length: '+str(len(data))+'\r\n'
     respond += 'Connection: close\r\n'
     respond += 'Content-Type: text/html\r\n\r\n'
-    respond +='Hello world'
+    respond += data
+
     return respond
