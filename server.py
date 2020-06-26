@@ -20,10 +20,9 @@ while True:
     respond = ""
     if components[0] == "b'GET":
         respond = get.respond_request(components)
+
     elif components[0] == "b'POST":
         respond = post.respond_request(components)
-    respond = bytes(respond, "utf-8")
+
     connection.sendall(respond)
     connection.close()
-
-r
