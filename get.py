@@ -13,13 +13,13 @@ def respond_request(data_link):
     if extension[1] == '.html':
         contentType = "text/html"
     elif extension[1] == '.css':
-        contentType = "text/html"
+        contentType = "text/css"
     elif extension[1] == '.png':
         contentType = "image/png"
     elif extension[1] == '.jpg':
         contentType = "image/jpg"
     elif extension[1] == '.ico':
-        contentType ="image/ico"
+        contentType = "image/ico"
 
     try:
         file = open(filename, "rb")
@@ -36,7 +36,6 @@ def respond_request(data_link):
     respond += 'Content-Type: ' + contentType + '\r\n\r\n'
     respond = bytes(respond, "utf-8")
     respond += data
-
     return respond
 
 

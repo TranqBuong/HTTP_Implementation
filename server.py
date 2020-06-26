@@ -20,9 +20,13 @@ while True:
     respond = ""
     if components[0] == "b'GET":
         respond = get.respond_request(components)
-
     elif components[0] == "b'POST":
         respond = post.respond_request(components)
+    else:
+        connection.sendall(bytes(""))
 
-    connection.sendall(respond)
+    try:
+        connection.sendall(respond)
+    except TypeError:
+        print(respond)
     connection.close()
