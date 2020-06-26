@@ -19,10 +19,11 @@ while True:
     components = data.split(" ")
     respond = ""
     if components[0] == "b'GET":
-        respond = get.respondRequest(components)
+        respond = get.respond_request(components)
     elif components[0] == "b'POST":
-        respond = post.respondRequest(components)
+        respond = post.respond_request(components)
     respond = bytes(respond, "utf-8")
     connection.sendall(respond)
     connection.close()
 
+r

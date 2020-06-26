@@ -2,38 +2,41 @@ import datetime
 import os
 
 
-def respondRequest(data):
+def respond_request(data_link):
     filename = './public'
-    if data[1] == '/':
+    if data_link[1] == '/':
         filename += '/index.html'
     else:
-        filename += data[1]
+        filename += data_link[1]
     extension = os.path.splitext(filename)
-    contentType = "document"
-    if extension == 'html':
+
+    if extension[1] == '.html':
         contentType = "text/html"
-    elif extension == 'css':
-        contentType = "stylesheet"
-    respond = 'HTTP/1.1 200 OK\r\n'
-    respond += 'Date: '
-    respond += datetime.datetime.now(datetime.timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT\r\n")
-    respond += 'Server: local host\r\n'
-    respond += 'Last-Modified: '
-    respond += 'Mon, 22 Jun 2020 22:00 GMT\r\n'
-    respond += 'Accept-Ranges: '
-    respond += 'bytes\r\n'
-    respond += "Status: 200\r\n"
+    elif extension[1] == '.css':
+        contentType = "text/html"
+    elif extension[1] == '.pnj':
+        contentType = "image"
+    elif extension[1] == 'jpg':
+        contentType = "image"
+
     try:
         file = open(filename, "r")
         data = file.read()
+        respond = 'HTTP/1.1 200 OK\r\n'
         respond += 'Content-Length: ' + str(len(data)) + '\r\n'
         respond += 'Connection: close\r\n'
         respond += 'Content-Type: ' + contentType + '\r\n\r\n'
         respond += data
-    except FileNotFoundError:
-        respond += 'Content-Length: 3\r\n'
+    except IOError:
+        file = open('./public/404.html', "r")
+        data = file.read()
+        respond = 'HTTP/1.1 404 Not Found\r\n'
+        respond += 'Content-Length: ' + str(len(data)) + '\r\n'
         respond += 'Connection: close\r\n'
         respond += 'Content-Type: text/html\r\n\r\n'
-        respond += '404'
-
+        respond += data
     return respond
+
+
+
+
