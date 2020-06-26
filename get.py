@@ -24,9 +24,7 @@ def respond_request(data_link):
     try:
         file = open(filename, "rb")
         data = file.read()
-
         respond = 'HTTP/1.1 200 OK\r\n'
-
     except IOError:
         file = open('./public/404.html', "rb")
         data = file.read()

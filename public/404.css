@@ -1,4 +1,25 @@
-h1{
-text-align: center;
-font-size:30;
+@keyframes rotating {
+    from {
+        transform: rotateY(0);
+    }
+
+    to {
+        transform: rotateY(360);
+    }
+}
+
+h1 {
+    font-weight: bolder;
+    font-size: 200px;
+    margin: auto;
+    color: rgb(255, 51, 0);
+    text-align: center;
+    animation-name: rotating;
+    animation-duration: 1s;
+}
+
+h2 {
+    font-size: 40px;
+    margin: auto;
+    text-align: center;
 }
