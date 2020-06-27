@@ -14,16 +14,16 @@ print("Listening at", s.getsockname())
 
 while True:
     connection, address = s.accept()
-    data = str(connection.recv(8192))
+    request_headers = (str(connection.recv(8192))).split(" ")
 
-    components = data.split(" ")
     respond = ""
-    if components[0] == "b'GET":
-        respond = get.respond_request(components)
-    elif components[0] == "b'POST":
-        respond = post.respond_request(components)
+
+    if request_headers[0] == "b'GET":
+        respond = get.respond_request(request_headers[1])
+    elif request_headers[0] == "b'POST":
+        respond = post.respond_request(request_headers)
     else:
-        connection.sendall(bytes(""))
+        connection.sendall(bytes("", "UTF-8"))
 
     try:
         connection.sendall(respond)

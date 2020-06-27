@@ -1,25 +1,23 @@
-import datetime
 import os
 
 
-def respond_request(data_link):
+def respond_request(request_url):
     filename = './public'
-    if data_link[1] == '/':
+    if request_url == '/':
         filename += '/index.html'
     else:
-        filename += data_link[1]
+        filename += request_url
+
     extension = os.path.splitext(filename)
 
+    content_type = "document"
+
     if extension[1] == '.html':
-        contentType = "text/html"
+        content_type = "text/html"
     elif extension[1] == '.css':
-        contentType = "text/css"
-    elif extension[1] == '.png':
-        contentType = "image/png"
-    elif extension[1] == '.jpg':
-        contentType = "image/jpg"
-    elif extension[1] == '.ico':
-        contentType = "image/ico"
+        content_type = "text/css"
+    elif extension[1] == '.png' or extension == '.jpg' or extension == '.jpg' or extension == '.ico':
+        content_type = "image/" + extension[1][1:]
 
     try:
         file = open(filename, "rb")
@@ -29,11 +27,11 @@ def respond_request(data_link):
         file = open('./public/404.html', "rb")
         data = file.read()
         respond = 'HTTP/1.1 404 Not Found\r\n'
-        contentType = 'text/html'
+        content_type = 'text/html'
 
     respond += 'Content-Length: ' + str(len(data)) + '\r\n'
     respond += 'Connection: close\r\n'
-    respond += 'Content-Type: ' + contentType + '\r\n\r\n'
+    respond += 'Content-Type: ' + content_type + '\r\n\r\n'
     respond = bytes(respond, "utf-8")
     respond += data
     return respond
