@@ -1,6 +1,8 @@
 import os
 
 
+image_extensions = ['.png', '.jpg', '.jpeg', '.ico']
+
 def respond_request(request_url):
     filename = './public'
     if request_url == '/':
@@ -16,7 +18,7 @@ def respond_request(request_url):
         content_type = "text/html"
     elif extension[1] == '.css':
         content_type = "text/css"
-    elif extension[1] == '.png' or extension == '.jpg' or extension == '.jpg' or extension == '.ico':
+    elif extension[1] in image_extensions:
         content_type = "image/" + extension[1][1:]
 
     try:
