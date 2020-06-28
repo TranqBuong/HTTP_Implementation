@@ -1,19 +1,23 @@
 
-def respond_request(request):
+def respond_request(request_headers):
 
-    if request[1] == '/signin':
-        req = request[-1].splitlines()
-        print(req)
+    if request_headers[1] == '/signin':
+
+        req = request_headers[-1].split('\\r\\n\\r\\n')
+
+        req[-1] = req[-1].replace("'","")
+
         if req[-1] == 'username=admin&password=admin':
-            file = open('./public/info.html','rb')
-            data = file.read()
             respond = 'HTTP/1.1 301 Moved Permanently\r\n'
-        else :
-            file = open('./public/404.html', "rb")
-            data = file.read()
-            respond = 'HTTP/1.1 404 Not Found\r\n'
+            respond += "Location: info.html"
 
-    return respond
+        else :
+            respond = 'HTTP/1.1 301 Moved Permanently\r\n'
+            respond += "Location: 404.html"
+
+    respond = bytes(respond, "utf-8")
+
+    return  respond
 
 
 
