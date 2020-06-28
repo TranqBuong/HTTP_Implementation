@@ -7,26 +7,23 @@ port = 80
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((host, port))
-# Allow 10 people in pending room
+# Allow 10 people in waiting room
 s.listen(10)
 
-print("Listening at", s.getsockname())
+print("Listening at ", s.getsockname()[0], ":", s.getsockname()[1], sep="")
 
 while True:
     connection, address = s.accept()
-    request_headers = (str(connection.recv(8192))).split(" ")
+    request_headers = connection.recv(8192).decode().split("\r\n")
 
-    respond = ""
-
-    if request_headers[0] == "b'GET":
-        respond = get.respond_request(request_headers[1])
-    elif request_headers[0] == "b'POST":
-        respond = post.respond_request(request_headers)
+    top_header = request_headers[0].split(" ")
+    if top_header[0] == "GET":
+        respond = get.respond_request(top_header[1])
+    elif top_header[0] == "POST":
+        request_body = request_headers[-1]
+        respond = post.respond_request(top_header, request_body)
     else:
-        connection.sendall(bytes("", "UTF-8"))
+        respond = bytes("", "UTF-8")
 
-    try:
-        connection.sendall(respond)
-    except TypeError:
-        print(respond)
+    connection.sendall(respond)
     connection.close()

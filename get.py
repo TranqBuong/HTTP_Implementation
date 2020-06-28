@@ -1,5 +1,7 @@
 import os
+
 image_extensions = ['.png', '.jpg', '.jpeg', '.ico']
+
 
 def respond_request(request_url):
     filename = './public'
