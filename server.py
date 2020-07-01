@@ -1,6 +1,7 @@
 import socket
 import get
 import post
+import threading
 
 host = '127.0.0.1'
 port = 80
@@ -12,9 +13,9 @@ s.listen(10)
 
 print("Listening at ", s.getsockname()[0], ":", s.getsockname()[1], sep="")
 
-while True:
-    connection, address = s.accept()
-    request_headers = connection.recv(8192).decode().split("\r\n")
+
+def handle_connection(con):
+    request_headers = con.recv(8192).decode().split("\r\n")
 
     top_header = request_headers[0].split(" ")
     if top_header[0] == "GET":
@@ -25,5 +26,11 @@ while True:
     else:
         respond = bytes("", "UTF-8")
 
-    connection.sendall(respond)
-    connection.close()
+    con.sendall(respond)
+    con.close()
+
+
+while True:
+    connection, address = s.accept()
+    t = threading.Thread(target=handle_connection, args=(connection,))
+    t.start()
