@@ -16,6 +16,10 @@
     }
 }
 
+body {
+    background-color: #12cad6;
+}
+
 #root {
     position: absolute;
     top: 40%;
@@ -43,7 +47,7 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     border: none;
-    background: rgb(14, 202, 14);
+    background: white;
     border-radius: 30px;
     padding: 20px;
     cursor: pointer;
@@ -52,6 +56,6 @@ h2 {
 }
 
 a {
-    color: white;
+    color: black;
     text-decoration: none;
 }

@@ -1,6 +1,6 @@
 html {
     font-family: sans-serif, "Times New Roman";
-    background-color: #cec5fa;
+    background-color: #12cad6;
 }
 
 #root {
@@ -13,9 +13,9 @@ html {
     transform: translate(-50%, -50%);
 
     background-color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 25px 50px;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
 }
 
 h1 {
