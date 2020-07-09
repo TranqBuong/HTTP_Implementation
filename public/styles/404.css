@@ -1,61 +1,47 @@
-@keyframes rotating {
-    0% {
-        transform: rotateY(0deg);
-    }
-
-    25% {
-        transform: rotateY(30deg);
-    }
-
-    75% {
-        transform: rotateY(-30deg);
-    }
-
-    100% {
-        transform: rotateY(0deg);
-    }
-}
-
 body {
     background-color: #12cad6;
 }
 
 #root {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px 50px 50px 60px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 h1 {
     font-weight: bolder;
-    font-size: 200px;
+    font-size: 120px;
     color: black;
     text-align: center;
-    animation: rotating 4s ease-in-out infinite;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 h2 {
-    font-size: 40px;
+    font-size: 28px;
     color: rgba(0, 0, 0, 0.753);
     text-align: center;
-}
-
-#go-back {
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    background: white;
-    border-radius: 30px;
-    padding: 20px;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.336);
 }
 
 a {
     color: black;
     text-decoration: none;
+}
+
+#go-back {
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    background: #0779e4;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.336);
 }

@@ -16,7 +16,6 @@ print("Listening at ", s.getsockname()[0], ":", s.getsockname()[1], sep="")
 
 def handle_connection(con):
     request_headers = con.recv(8192).decode().split("\r\n")
-
     top_header = request_headers[0].split(" ")
     if top_header[0] == "GET":
         respond = get.respond_request(top_header[1])
